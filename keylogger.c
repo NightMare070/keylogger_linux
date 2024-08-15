@@ -94,7 +94,7 @@ const char* get_key_name(int code) {
         case KEY_F10: return " F10 ";
         case KEY_F11: return " F11 ";
         case KEY_F12: return " F12 ";
-        default: return "";  // Valor default para teclas no declaradas
+        default: return "";  // Valor nulo por default para teclas no declaradas
     }
 }
 
