@@ -33,11 +33,11 @@ Es necesario contar con lo siguiente para poder ejecutar y/o compilar el program
   sudo apt-get install openssh-client
 ```
 
-- **Librerias evdev (para trabajar con evdev).**
+<!-- - **Librerias evdev (para trabajar con evdev).**
 
 ```bash
   sudo apt-get install libevdev-dev
-```
+``` -->
 
 **Nota:** Además, se utilizaron otras librerias que estan preinstaladas en entornos linux, en caso no presentar errores de librerias, aqui se encuentra un listado con todas las que se utilizaron.
 
