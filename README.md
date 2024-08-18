@@ -54,6 +54,12 @@ Es necesario contar con lo siguiente para poder ejecutar y/o compilar el program
 
 # Instrucciones de uso:
 
+Clonar este repositorio con ayuda del comando:
+
+```c
+  git clone https://github.com/NightMare070/keylogger_linux
+```
+
 Dentro de keylogger.c configurar las rutas de acuerdo a donde se requieran:
 
 ```c
