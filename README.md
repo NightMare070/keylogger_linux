@@ -1,4 +1,4 @@
-# Keylogger + Caps 👁
+# Keylogger + ScreenShots
 
 Keylogger con función de capturas de pantalla y envio de datos a un servidor configurable **LINUX**.
 
